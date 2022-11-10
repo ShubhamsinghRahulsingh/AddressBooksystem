@@ -12,7 +12,7 @@ namespace AddressBook
             bool flag = true;
             while (flag)
             {
-                Console.WriteLine("Select 1.Create Contact 2.Edit Contact 3.Delete contact 4.Display contacts 5.Exit");
+                Console.WriteLine("Select 1.Create Contact 2.Edit Contact 3.Delete contact 4.Display contacts 5.Create Dictionary 6.Display Dictionary 7.Exit");
                 int option = Convert.ToInt32(Console.ReadLine());
                 switch (option)
                 {
@@ -29,6 +29,12 @@ namespace AddressBook
                         create.Display();
                         break;
                     case 5:
+                        create.CreateDictionary();
+                        break;
+                    case 6:
+                        create.DisplayDictionary();
+                        break;
+                    case 7:
                         flag = false;
                         break;
                 }

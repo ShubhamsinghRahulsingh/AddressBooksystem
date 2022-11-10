@@ -7,6 +7,7 @@ namespace AddressBook
     public class AddressBookMain
     {
         List<Contact> address = new List<Contact>();
+        Dictionary<string, List<Contact>> addressBook = new Dictionary<string, List<Contact>>();  
         public void CreateContact()
         {
             Contact contact = new Contact();
@@ -87,6 +88,26 @@ namespace AddressBook
                 Console.WriteLine("Contact Details:" + "\n" + "FirstName: " + contact.FirstName + "\n" + "LastName: " + contact.LastName + "\n" + "Address: " + contact.Address + "\n" + "City: " + contact.City + "\n" + "State: " + contact.State + "\n" + "Zip: " + contact.Zip + "\n" + "PhoneNumber: " + contact.PhoneNUmber + "\n" + "Email: " + contact.Email);
             }
 
+        }
+        public void CreateDictionary()
+        {
+            Console.WriteLine("Enter with what name you want to add in dictionary");
+            string name=Console.ReadLine();
+            addressBook.Add(name, address);
+            address = new List<Contact>();
+        }
+        public void DisplayDictionary()
+        {
+            foreach(var data in addressBook)
+            {
+                Console.WriteLine(data.Key);//printing dictionary keys
+                foreach(var contact in data.Value)// checking values inside keys
+                {
+                   Console.WriteLine("Contact Details:" + "\n" + "FirstName: " + contact.FirstName + "\n" + "LastName: " + contact.LastName + "\n" + "Address: " + contact.Address + "\n" + "City: " + contact.City + "\n" + "State: " + contact.State + "\n" + "Zip: " + contact.Zip + "\n" + "PhoneNumber: " + contact.PhoneNUmber + "\n" + "Email: " + contact.Email);
+
+                }
+
+            }
         }
     }
 }
