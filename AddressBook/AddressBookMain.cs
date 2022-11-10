@@ -7,10 +7,9 @@ namespace AddressBook
     public class AddressBookMain
     {
         List<Contact> address = new List<Contact>();
-        Contact contact = new Contact();
-        int i=0;
         public void CreateContact()
         {
+            Contact contact = new Contact();
             Console.WriteLine("Enter the firstName");
             contact.FirstName = Console.ReadLine();
             Console.WriteLine("Enter the lastName");
@@ -29,10 +28,12 @@ namespace AddressBook
             contact.Email = Console.ReadLine();
             address.Add(contact);
         }
-        public void EditContact(string name)
+        public void EditContact()
         {
+            Console.WriteLine("Enter the name whose details you want to edit");
+            string editcontact= Console.ReadLine();
             foreach (var contact in address)
-                if (contact.FirstName.Equals(name) || contact.LastName.Equals(name))
+                if (contact.FirstName.Equals(editcontact) || contact.LastName.Equals(editcontact))
                 {
                     Console.WriteLine("What you want to Edit" + "\n" + "Select 1.Address 2.City 3.State 4.Zip 5.PhoneNumber 6.Email ");
                     int option = Convert.ToInt32(Console.ReadLine());
@@ -65,19 +66,19 @@ namespace AddressBook
 
                     }
                 }
-                 else
-                      Console.WriteLine("Contact did not found");
-               
         }
-        public void DeleteContact(string name)
+        public void DeleteContact()
         {
+            Console.WriteLine("Enter the name whose contact you want to delete");
+            string delcontact=Console.ReadLine();
             Contact deletecontact = new Contact();
-            foreach (var contact in address)
-                if (contact.FirstName.Equals(name) || contact.LastName.Equals(name))
+            foreach (var contact in address.ToList())
+                if (contact.FirstName.Equals(delcontact) || contact.LastName.Equals(delcontact))
                 {
                     deletecontact = contact;
                 }
                address.Remove(deletecontact);
+            Console.WriteLine("contact has been deleted successfully");
         }
         public void Display()
         {

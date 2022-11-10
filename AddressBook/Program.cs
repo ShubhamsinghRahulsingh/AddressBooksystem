@@ -12,23 +12,23 @@ namespace AddressBook
             bool flag = true;
             while (flag)
             {
-                Console.WriteLine("Select 1.To Create Contact 2.To Edit Contact 3.To Delete Contact 4.Exit");
+                Console.WriteLine("Select 1.Create Contact 2.Edit Contact 3.Delete contact 4.Display contacts 5.Exit");
                 int option = Convert.ToInt32(Console.ReadLine());
                 switch (option)
                 {
                     case 1:
                         create.CreateContact();
-                        create.Display();
                         break;
                     case 2:
-                        create.EditContact("Shubham");
-                        create.Display();
+                        create.EditContact();
                         break;
                     case 3:
-                        create.DeleteContact("Shubham");
-                        create.Display();
+                        create.DeleteContact();
                         break;
                     case 4:
+                        create.Display();
+                        break;
+                    case 5:
                         flag = false;
                         break;
                 }
