@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.Contracts;
+using System.Reflection.Metadata;
 using System.Xml.Linq;
 
 namespace AddressBook
@@ -8,7 +10,9 @@ namespace AddressBook
     public class AddressBookMain
     {
         List<Contact> address = new List<Contact>();
-        Dictionary<string, List<Contact>> addressBook = new Dictionary<string, List<Contact>>();  
+        Dictionary<string, List<Contact>> addressBook = new Dictionary<string, List<Contact>>();
+        List<Contact> cityList = new List<Contact>();
+        List<Contact> stateList = new List<Contact>();
         public void CreateContact()
         {
                 Contact contact = new Contact();
@@ -90,6 +94,7 @@ namespace AddressBook
             }
 
         }
+        //UC7
         public void CheckForDuplicacy(List<Contact> address,Contact contact)
         {
             if (address.Any())
@@ -101,6 +106,50 @@ namespace AddressBook
                     }
             }
                 address.Add(contact);
+        }
+        //UC8
+        public void SearchPersonInCityOrState(string searchName)
+        {
+            Console.WriteLine("1.Search Person In City\n2.Search Person In State");
+            int choice=Convert.ToInt32(Console.ReadLine());
+            switch(choice)
+            {
+                case 1:
+                    Console.Write("Enter the City Name : ");
+                    string cityName = Console.ReadLine();
+                    foreach (var dictKey in addressBook)
+                    {
+                        foreach (var dictData in dictKey.Value.FindAll(x => x.City == cityName))
+                        {
+                            cityList.Add(dictData);
+                            if (cityList.Any(x => x.FirstName == searchName))
+                            {
+                                Console.WriteLine("Person With Name {0} is found in the AddressBook in City {1}", searchName,cityName);
+                                return;
+                            }
+                        }
+                    }
+                        Console.WriteLine("Person With Name {0} is not found in the AddressBook in City {1}", searchName,cityName);
+                    break;
+
+                case 2:
+                    Console.Write("Enter the State Name : ");
+                    string stateName = Console.ReadLine();
+                    foreach (var dictKey in addressBook)
+                    {
+                        foreach (var dictData in dictKey.Value.FindAll(x => x.State == stateName))
+                        {
+                            stateList.Add(dictData);
+                            if (stateList.Any(x => x.FirstName == searchName))
+                            {
+                                Console.WriteLine("Person With Name {0} is found in the AddressBook in State {1}", searchName, stateName);
+                                return;
+                            }
+                        }
+                    }
+                    Console.WriteLine("Person With Name {0} is not found in the AddressBook in State {1}", searchName, stateName);
+                    break;
+            }
         }
         public void CreateDictionary()
         {
@@ -116,8 +165,7 @@ namespace AddressBook
                 Console.WriteLine(data.Key);//printing dictionary keys
                 foreach(var contact in data.Value)// checking values inside keys
                 {
-                   Console.WriteLine("Contact Details:" + "\n" + "FirstName: " + contact.FirstName + "\n" + "LastName: " + contact.LastName + "\n" + "Address: " + contact.Address + "\n" + "City: " + contact.City + "\n" + "State: " + contact.State + "\n" + "Zip: " + contact.Zip + "\n" + "PhoneNumber: " + contact.PhoneNUmber + "\n" + "Email: " + contact.Email);
-
+                    Console.WriteLine("Contact Details:" + "\n" + "FirstName: " + contact.FirstName + "\n" + "LastName: " + contact.LastName + "\n" + "Address: " + contact.Address + "\n" + "City: " + contact.City + "\n" + "State: " + contact.State + "\n" + "Zip: " + contact.Zip + "\n" + "PhoneNumber: " + contact.PhoneNUmber + "\n" + "Email: " + contact.Email);
                 }
 
             }
