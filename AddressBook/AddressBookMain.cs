@@ -245,6 +245,19 @@ namespace AddressBook
                     break;
             }
         }
+        //UC11
+        public void SortContactsByPersonsName()
+        {
+            foreach (var contact in addressBook)
+            {
+                Console.WriteLine("AddressBook Name is: "+contact.Key);
+                foreach (var data in contact.Value.OrderBy(x => (x.FirstName + x.LastName)))
+                {
+                    Console.WriteLine("FirstName: " + data.FirstName + " LastName: " + data.LastName + " Address: " + data.Address + " City: " + data.City + " State: " + data.State + " Zip: " + data.Zip + " PhoneNumber: " + data.PhoneNUmber + " Email: " + data.Email);
+                }
+                Console.WriteLine();
+            }
+        }
 
         public void CreateDictionary()
         {
