@@ -13,31 +13,33 @@ namespace AddressBook
         Dictionary<string, List<Contact>> addressBook = new Dictionary<string, List<Contact>>();
         List<Contact> cityList = new List<Contact>();
         List<Contact> stateList = new List<Contact>();
+        Dictionary<string, List<Contact>> cities = new Dictionary<string, List<Contact>>();
+        Dictionary<string, List<Contact>> states = new Dictionary<string, List<Contact>>();
         public void CreateContact()
         {
-                Contact contact = new Contact();
-                Console.WriteLine("Enter the firstName");
-                contact.FirstName = Console.ReadLine();
-                Console.WriteLine("Enter the lastName");
-                contact.LastName = Console.ReadLine();
-                Console.WriteLine("Enter the Address");
-                contact.Address = Console.ReadLine();
-                Console.WriteLine("Enter the City");
-                contact.City = Console.ReadLine();
-                Console.WriteLine("Enter the State");
-                contact.State = Console.ReadLine();
-                Console.WriteLine("Enter the Zip");
-                contact.Zip = Convert.ToInt64(Console.ReadLine());
-                Console.WriteLine("Enter the PhoneNumber");
-                contact.PhoneNUmber = Console.ReadLine();
-                Console.WriteLine("Enter the Email ID");
-                contact.Email = Console.ReadLine();
-                CheckForDuplicacy(address, contact);              
+            Contact contact = new Contact();
+            Console.WriteLine("Enter the firstName");
+            contact.FirstName = Console.ReadLine();
+            Console.WriteLine("Enter the lastName");
+            contact.LastName = Console.ReadLine();
+            Console.WriteLine("Enter the Address");
+            contact.Address = Console.ReadLine();
+            Console.WriteLine("Enter the City");
+            contact.City = Console.ReadLine();
+            Console.WriteLine("Enter the State");
+            contact.State = Console.ReadLine();
+            Console.WriteLine("Enter the Zip");
+            contact.Zip = Convert.ToInt64(Console.ReadLine());
+            Console.WriteLine("Enter the PhoneNumber");
+            contact.PhoneNUmber = Console.ReadLine();
+            Console.WriteLine("Enter the Email ID");
+            contact.Email = Console.ReadLine();
+            CheckForDuplicacy(address, contact);
         }
         public void EditContact()
         {
             Console.WriteLine("Enter the name whose details you want to edit");
-            string editcontact= Console.ReadLine();
+            string editcontact = Console.ReadLine();
             foreach (var contact in address)
                 if (contact.FirstName.Equals(editcontact) || contact.LastName.Equals(editcontact))
                 {
@@ -76,14 +78,14 @@ namespace AddressBook
         public void DeleteContact()
         {
             Console.WriteLine("Enter the name whose contact you want to delete");
-            string delcontact=Console.ReadLine();
+            string delcontact = Console.ReadLine();
             Contact deletecontact = new Contact();
             foreach (var contact in address.ToList())
                 if (contact.FirstName.Equals(delcontact) || contact.LastName.Equals(delcontact))
                 {
                     deletecontact = contact;
                 }
-               address.Remove(deletecontact);
+            address.Remove(deletecontact);
             Console.WriteLine("contact has been deleted successfully");
         }
         public void Display()
@@ -95,24 +97,24 @@ namespace AddressBook
 
         }
         //UC7
-        public void CheckForDuplicacy(List<Contact> address,Contact contact)
+        public void CheckForDuplicacy(List<Contact> address, Contact contact)
         {
             if (address.Any())
-            { 
-                    if (address.Any(e=>e.FirstName == contact.FirstName))//Lambda expression
-                    {
-                        Console.WriteLine("A person with name {0} is already existed", contact.FirstName);
-                        return;
-                    }
+            {
+                if (address.Any(e => e.FirstName == contact.FirstName))//Lambda expression
+                {
+                    Console.WriteLine("A person with name {0} is already existed", contact.FirstName);
+                    return;
+                }
             }
-                address.Add(contact);
+            address.Add(contact);
         }
         //UC8
         public void SearchPersonInCityOrState(string searchName)
         {
             Console.WriteLine("1.Search Person In City\n2.Search Person In State");
-            int choice=Convert.ToInt32(Console.ReadLine());
-            switch(choice)
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
             {
                 case 1:
                     Console.Write("Enter the City Name : ");
@@ -124,12 +126,12 @@ namespace AddressBook
                             cityList.Add(dictData);
                             if (cityList.Any(x => x.FirstName == searchName))
                             {
-                                Console.WriteLine("Person With Name {0} is found in the AddressBook in City {1}", searchName,cityName);
+                                Console.WriteLine("Person With Name {0} is found in the AddressBook in City {1}", searchName, cityName);
                                 return;
                             }
                         }
                     }
-                        Console.WriteLine("Person With Name {0} is not found in the AddressBook in City {1}", searchName,cityName);
+                    Console.WriteLine("Person With Name {0} is not found in the AddressBook in City {1}", searchName, cityName);
                     break;
 
                 case 2:
@@ -151,6 +153,62 @@ namespace AddressBook
                     break;
             }
         }
+        //UC9
+        public void ViewPersonInCityOrState()
+        {
+            cityList = new List<Contact>();
+            stateList = new List<Contact>();
+            Console.WriteLine("1.Select Whether to view Persons by\n1.City\n2.State");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    Console.Write("Enter the City Name : ");
+                    string cityName = Console.ReadLine();
+                    foreach (var dictKey in addressBook)
+                    {
+                        foreach (var dictData in dictKey.Value.FindAll(x => x.City == cityName))
+                        {
+                            cityList.Add(dictData);
+                        }
+                    }
+                    cities.Add(cityName, cityList);
+                    Console.WriteLine("Persons in City {0} are:", cityName);
+                    foreach (var data in cities)
+                    {
+                        foreach (var contact in data.Value)// checking values inside keys
+                        {
+                            Console.WriteLine(contact.FirstName + " " + contact.LastName);
+                        }
+
+                    }
+                    cities=new Dictionary<string, List<Contact>>();
+                    break;
+                case 2:
+                    Console.Write("Enter the State Name : ");
+                    string stateName = Console.ReadLine();
+                    foreach (var dictKey in addressBook)
+                    {
+                        foreach (var dictData in dictKey.Value.FindAll(x => x.State == stateName))
+                        {
+                            stateList.Add(dictData);
+                        }
+                    }
+                    states.Add(stateName, stateList);
+                    Console.WriteLine("Persons in State {0} are:", stateName);
+                    foreach (var data in states)
+                    {
+                        foreach (var contact in data.Value)// checking values inside keys
+                        {
+                            Console.WriteLine(contact.FirstName + " " + contact.LastName);
+                        }
+
+                    }
+                    states = new Dictionary<string, List<Contact>>();
+                    break;
+            }
+        }
+
         public void CreateDictionary()
         {
             Console.WriteLine("Enter with what name you want to add in dictionary");
