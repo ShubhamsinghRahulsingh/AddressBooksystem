@@ -208,6 +208,43 @@ namespace AddressBook
                     break;
             }
         }
+        //UC10
+        public void CountContactsByCityOrState()
+        {
+            cityList = new List<Contact>();
+            stateList = new List<Contact>();
+            Console.WriteLine("1.Select Whether to Count Contacts by\n1.City\n2.State");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    Console.Write("Enter the City Name : ");
+                    string cityName = Console.ReadLine();
+                    foreach (var dictKey in addressBook)
+                    {
+                        foreach (var dictData in dictKey.Value.FindAll(x => x.City == cityName))
+                        {
+                            cityList.Add(dictData);
+                        }
+                    }
+                    int countCity = cityList.Count();
+                    Console.WriteLine("Total Contacts Persons With CityName {0} are: {1}", cityName, countCity);
+                    break;
+                case 2:
+                    Console.Write("Enter the State Name : ");
+                    string stateName = Console.ReadLine();
+                    foreach (var dictKey in addressBook)
+                    {
+                        foreach (var dictData in dictKey.Value.FindAll(x => x.State == stateName))
+                        {
+                            stateList.Add(dictData);
+                        }
+                    }
+                    int countState = stateList.Count();
+                    Console.WriteLine("Total Contacts Persons With StateName {0} are: {1}", stateName, countState);
+                    break;
+            }
+        }
 
         public void CreateDictionary()
         {
