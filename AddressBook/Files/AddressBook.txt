@@ -1,0 +1,5 @@
+FirstName: Shubham LastName: Singh Address: Rampuri Colony City: Saharanpur State: Uttar Pradesh Zip: 247001 PhoneNumber: 807777474 Email: shubham@gmail.com
+FirstName: Rahul LastName: Singh Address: Royal Garden City: Bangalore State: Karnataka Zip: 564663 PhoneNumber: 8737373737 Email: rahul@gmail.com
+FirstName: Tejasvee LastName: Sharma Address: Hasanpur City: Ajmer State: Rajasthan Zip: 364646 PhoneNumber: 9837373737 Email: tejas@gmail.com
+FirstName: Akshay LastName: Kumar Address: Labour Colony City: Allahabad State: Xyz Zip: 3737373 PhoneNumber: 938383838 Email: akshay@gmail.com
+FirstName: Shubham LastName: Saini Address: Manak Mau City: Aligarh State: ABC Zip: 4535353 PhoneNumber: 9838383838 Email: shubham@gmail.com

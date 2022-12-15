@@ -101,9 +101,9 @@ namespace AddressBook
         {
             if (address.Any())
             {
-                if (address.Any(e => e.FirstName == contact.FirstName))//Lambda expression
+                if (address.Any(e => e.FirstName == contact.FirstName && e.LastName==contact.LastName))//Lambda expression
                 {
-                    Console.WriteLine("A person with name {0} is already existed", contact.FirstName);
+                    Console.WriteLine("A person with name {0} {1} is already existed", contact.FirstName,contact.LastName);
                     return;
                 }
             }
@@ -300,6 +300,26 @@ namespace AddressBook
                     }
                     break;
             }
+        }
+        //UC13
+        public void ReadAndWriteAddressBookToFile()
+        {
+            //Writing in  file
+            string filePath = @"D:\GitRepository\AddressBooksystem\AddressBook\Files\AddressBook.txt";
+            StreamWriter writer = new StreamWriter(filePath);
+            foreach(var contact in addressBook)
+            {
+                foreach(var data in contact.Value)
+                {
+                    writer.WriteLine("FirstName: " + data.FirstName + " LastName: " + data.LastName + " Address: " + data.Address + " City: " + data.City + " State: " + data.State + " Zip: " + data.Zip + " PhoneNumber: " + data.PhoneNUmber + " Email: " + data.Email);
+                }
+            }
+            writer.Close();
+
+            //Reading from file
+            StreamReader reader=new StreamReader(filePath);
+            Console.WriteLine(reader.ReadToEnd());
+            reader.Close();
         }
         public void CreateDictionary()
         {
