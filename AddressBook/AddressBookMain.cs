@@ -258,7 +258,49 @@ namespace AddressBook
                 Console.WriteLine();
             }
         }
-
+        //UC12
+        public void SortContactsByCityOrStateOrZIP()
+        {
+            
+            Console.WriteLine("Select on which basis you want to Sort contacts\n1.City\n2.State\n3.ZIP");
+            int select=Convert.ToInt32(Console.ReadLine());
+            switch(select)
+            {
+                case 1:
+                    foreach (var contact in addressBook)
+                    {
+                        Console.WriteLine("AddressBook Name is: " + contact.Key);
+                        foreach (var data in contact.Value.OrderBy(x =>x.City))
+                        {
+                            Console.WriteLine("FirstName: " + data.FirstName + " LastName: " + data.LastName + " Address: " + data.Address + " City: " + data.City + " State: " + data.State + " Zip: " + data.Zip + " PhoneNumber: " + data.PhoneNUmber + " Email: " + data.Email);
+                        }
+                        Console.WriteLine();
+                    }
+                    break;
+                case 2:
+                    foreach (var contact in addressBook)
+                    {
+                        Console.WriteLine("AddressBook Name is: " + contact.Key);
+                        foreach (var data in contact.Value.OrderBy(x =>x.State))
+                        {
+                            Console.WriteLine("FirstName: " + data.FirstName + " LastName: " + data.LastName + " Address: " + data.Address + " City: " + data.City + " State: " + data.State + " Zip: " + data.Zip + " PhoneNumber: " + data.PhoneNUmber + " Email: " + data.Email);
+                        }
+                        Console.WriteLine();
+                    }
+                    break;
+                case 3:
+                    foreach (var contact in addressBook)
+                    {
+                        Console.WriteLine("AddressBook Name is: " + contact.Key);
+                        foreach (var data in contact.Value.OrderBy(x => x.Zip))
+                        {
+                            Console.WriteLine("FirstName: " + data.FirstName + " LastName: " + data.LastName + " Address: " + data.Address + " City: " + data.City + " State: " + data.State + " Zip: " + data.Zip + " PhoneNumber: " + data.PhoneNUmber + " Email: " + data.Email);
+                        }
+                        Console.WriteLine();
+                    }
+                    break;
+            }
+        }
         public void CreateDictionary()
         {
             Console.WriteLine("Enter with what name you want to add in dictionary");
