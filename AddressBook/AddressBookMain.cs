@@ -1,7 +1,9 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.Contracts;
+using System.Globalization;
 using System.Reflection.Metadata;
 using System.Xml.Linq;
 
@@ -309,6 +311,7 @@ namespace AddressBook
             StreamWriter writer = new StreamWriter(filePath);
             foreach(var contact in addressBook)
             {
+                Console.WriteLine("AddressBook Key Name is: ",contact.Key);
                 foreach(var data in contact.Value)
                 {
                     writer.WriteLine("FirstName: " + data.FirstName + " LastName: " + data.LastName + " Address: " + data.Address + " City: " + data.City + " State: " + data.State + " Zip: " + data.Zip + " PhoneNumber: " + data.PhoneNUmber + " Email: " + data.Email);
@@ -320,6 +323,35 @@ namespace AddressBook
             StreamReader reader=new StreamReader(filePath);
             Console.WriteLine(reader.ReadToEnd());
             reader.Close();
+        }
+        //UC14
+        public void ReadOrWriteAddressBookFromAndToCsvFile()
+        {
+            //Writing in  CSV File
+            string csvFilePath = @"D:\GitRepository\AddressBooksystem\AddressBook\Files\AddressBook.csv";
+            using (StreamWriter writer = new StreamWriter(csvFilePath))
+            using (var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+               foreach(var data in addressBook)
+               {
+                    List<Contact> csvlist = new List<Contact>();
+                    foreach (var contact in data.Value)
+                    {
+                        csvlist.Add(contact);
+                        csvWriter.WriteRecords(csvlist);
+                    }
+               }
+            }
+            //Reading from CSV File
+            using (StreamReader reader = new StreamReader(csvFilePath))
+            using (var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                var records = csvReader.GetRecords<Contact>().ToList();
+                foreach(var data in records)
+                {
+                    Console.WriteLine("FirstName: " + data.FirstName + " LastName: " + data.LastName + " Address: " + data.Address + " City: " + data.City + " State: " + data.State + " Zip: " + data.Zip + " PhoneNumber: " + data.PhoneNUmber + " Email: " + data.Email);
+                }
+            }
         }
         public void CreateDictionary()
         {
