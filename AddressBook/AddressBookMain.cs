@@ -1,8 +1,10 @@
 ﻿using CsvHelper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.Contracts;
+using System.Formats.Asn1;
 using System.Globalization;
 using System.Reflection.Metadata;
 using System.Xml.Linq;
@@ -351,6 +353,24 @@ namespace AddressBook
                 {
                     Console.WriteLine("FirstName: " + data.FirstName + " LastName: " + data.LastName + " Address: " + data.Address + " City: " + data.City + " State: " + data.State + " Zip: " + data.Zip + " PhoneNumber: " + data.PhoneNUmber + " Email: " + data.Email);
                 }
+            }
+        }
+        //UC15
+        public void ReadOrWriteAddressBookToJSONFile()
+        {
+            //Writing in Json file
+            string jsonFilepath = @"D:\GitRepository\AddressBooksystem\AddressBook\Files\AddressBook.json";
+            string json = JsonConvert.SerializeObject(addressBook, Formatting.Indented);
+            File.WriteAllText(jsonFilepath, json);
+            Console.WriteLine("Data is Written Successfully");
+
+            //Reading json file
+            string readJSON = File.ReadAllText(jsonFilepath);
+            var jsonData = JsonConvert.DeserializeObject<Dictionary<string,List<Contact>>>(readJSON);
+            foreach (var data in jsonData)
+            {
+                foreach(var contact in data.Value)
+                Console.WriteLine("Contact Details:" + "\n" + "FirstName: " + contact.FirstName + "\n" + "LastName: " + contact.LastName + "\n" + "Address: " + contact.Address + "\n" + "City: " + contact.City + "\n" + "State: " + contact.State + "\n" + "Zip: " + contact.Zip + "\n" + "PhoneNumber: " + contact.PhoneNUmber + "\n" + "Email: " + contact.Email);
             }
         }
         public void CreateDictionary()

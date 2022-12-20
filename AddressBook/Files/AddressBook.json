@@ -1,0 +1,46 @@
+{
+  "Brothers": [
+    {
+      "FirstName": "Shubham",
+      "LastName": "Singh",
+      "Address": "63663/4",
+      "City": "SRE",
+      "State": "UP",
+      "Zip": 38383,
+      "PhoneNUmber": "83737373",
+      "Email": "shubham@gmail.com"
+    },
+    {
+      "FirstName": "Rahul",
+      "LastName": "Singh",
+      "Address": "73733/373",
+      "City": "Bangalore",
+      "State": "Karnataka",
+      "Zip": 474884,
+      "PhoneNUmber": "8373636363",
+      "Email": "rahul@gmail.com"
+    }
+  ],
+  "Friends": [
+    {
+      "FirstName": "Tejas",
+      "LastName": "Sharma",
+      "Address": "6363/4",
+      "City": "SRE",
+      "State": "UP",
+      "Zip": 8484,
+      "PhoneNUmber": "8373737373",
+      "Email": "tejas@gmail.com"
+    },
+    {
+      "FirstName": "Akshay",
+      "LastName": "Nishad",
+      "Address": "6363/4",
+      "City": "Allahabad",
+      "State": "RT",
+      "Zip": 7477,
+      "PhoneNUmber": "737373773",
+      "Email": "akshay@gmail.com"
+    }
+  ]
+}
