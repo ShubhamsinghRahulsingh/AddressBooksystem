@@ -59,5 +59,31 @@ namespace AddressBook
                 Console.WriteLine(ex.Message);
             }
         }
+        public void UpdateContactDetailsInDatabase()
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+                    this.sqlconnection.Open();
+                    string query = @"UPDATE AddressBookADO SET LastName='Saini',Address='Patel Nagar' WHERE FirstName='Dheeraj'";
+                    SqlCommand command = new SqlCommand(query, this.sqlconnection);
+                    command.CommandType = CommandType.Text;
+                    int result = command.ExecuteNonQuery();
+                    this.sqlconnection.Close();
+                    if (result >= 1)
+                    {
+                        Console.WriteLine("Details Updated Successfully");
+                    }
+                    else
+                        Console.WriteLine("No DataBase found");
+                }
+            }
+            catch (Exception ex)
+            {
+                // handle exception here
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }
