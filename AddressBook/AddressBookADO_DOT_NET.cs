@@ -85,5 +85,49 @@ namespace AddressBook
                 Console.WriteLine(ex.Message);
             }
         }
+        public void RetrieveEntriesForParticularPeriodFromDB()
+        {
+            try
+            {
+                List<ContactADO> contactAdo = new List<ContactADO>();
+                using (this.sqlconnection)
+                {
+                    this.sqlconnection.Open();
+                    string query = @"select * from AddressBookADO where DOB BETWEEN '1992-04-16' AND '1999-02-03' ";
+                    SqlCommand command = new SqlCommand(query, this.sqlconnection);
+                    command.CommandType = CommandType.Text;
+                    SqlDataReader dr = command.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            ContactADO service = new ContactADO();
+                            service.FirstName = dr.GetString(0);
+                            service.LastName = dr.GetString(1);
+                            service.Address = dr.GetString(2);
+                            service.City = dr.GetString(3);
+                            service.State = dr.GetString(4);
+                            service.Zip = dr.GetInt32(5);
+                            service.PhoneNUmber = dr.GetInt64(6);
+                            service.Email = dr.GetString(7);
+                            contactAdo.Add(service);
+                        }
+                        foreach (var data in contactAdo)
+                        {
+                            Console.WriteLine("Firstame:" + data.FirstName + "  " + "LastName:" + data.LastName + "  " + "Address:" + data.Address + "  " + "City:" + data.City + "  " + "State:" + data.State + "  " + "ZIP:" + data.Zip + "  " + "PhoneNo:" + data.PhoneNUmber + "  " + "Email:" + data.Email);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No Database Found");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // handle exception here
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }

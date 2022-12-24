@@ -19,3 +19,11 @@ INSERT INTO AddressBookADO(FirstName,LastName,Address,City,State,ZIP,PhoneNumber
 ('Dheeraj','Singh','Line Paar','Moradabad','UP',456363,8373737273,'dheeraj@gmail.com'),
 ('Shanu','Gupta','Hasanpur','Dehradun','UK',345233,7675747374,'shanu@gmail.com'),
 ('Yogesh','Upadhyay','Manak Mau','Roorkee','UK',373746,848838383,'yogesh@gmail.com')
+
+ALTER TABLE AddressBookADO ADD DOB Date
+UPDATE AddressBookADO SET DOB='2000-06-04' WHERE FirstName='Dheeraj'
+UPDATE AddressBookADO SET DOB='1992-04-16' WHERE FirstName='Rahul'
+UPDATE AddressBookADO SET DOB='1980-09-24' WHERE FirstName='Shanu'
+UPDATE AddressBookADO SET DOB='1995-04-23' WHERE FirstName='Shubham'
+UPDATE AddressBookADO SET DOB='1993-01-10' WHERE FirstName='Yogesh'
+

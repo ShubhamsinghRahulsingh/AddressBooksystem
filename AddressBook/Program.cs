@@ -14,7 +14,7 @@ namespace AddressBook
             while (flag)
             {
                 Console.WriteLine("------------------------------------------------------");
-                Console.WriteLine("1.Create Contact\n2.Edit Contact\n3.Delete contact\n4.Display contacts\n5.Create Dictionary\n6.Display Dictionary\n7.SearchPersonInCityOrState\n8.ViewPersonInCityOrState\n9.CountContactsByCityOrState\n10.SortContactsByPersonsName\n11.SortContactsByCityOrStateOrZIP\n12.ReadAndWriteAddressBookToFile\n13.ReadOrWriteAddressBookFromAndToCsvFile\n14.ReadOrWriteAddressBookToJSONFile\n15.RetrieveEntriesFromAddressBookDB\n16.UpdateContactDetailsInDatabase\n17.Exit");
+                Console.WriteLine("1.Create Contact\n2.Edit Contact\n3.Delete contact\n4.Display contacts\n5.Create Dictionary\n6.Display Dictionary\n7.SearchPersonInCityOrState\n8.ViewPersonInCityOrState\n9.CountContactsByCityOrState\n10.SortContactsByPersonsName\n11.SortContactsByCityOrStateOrZIP\n12.ReadAndWriteAddressBookToFile\n13.ReadOrWriteAddressBookFromAndToCsvFile\n14.ReadOrWriteAddressBookToJSONFile\n15.RetrieveEntriesFromAddressBookDB\n16.UpdateContactDetailsInDatabase\n17.RetrieveEntriesForParticularPeriodFromDB\n18.Exit");
                 int option = Convert.ToInt32(Console.ReadLine());
                 switch (option)
                 {
@@ -69,6 +69,9 @@ namespace AddressBook
                         ado.UpdateContactDetailsInDatabase();
                         break;
                     case 17:
+                        ado.RetrieveEntriesForParticularPeriodFromDB();
+                        break;
+                    case 18:
                         flag = false;
                         break;
                 }
