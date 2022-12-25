@@ -129,5 +129,45 @@ namespace AddressBook
                 Console.WriteLine(ex.Message);
             }
         }
+        public void CountNoOfContactsByCityOrState()
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+                    Console.WriteLine("Select Whether to count By\n1.City\n2.State");
+                    int sel = Convert.ToInt32(Console.ReadLine());
+                    this.sqlconnection.Open();
+                    switch (sel)
+                    {
+                        case 1:
+                            string query = @"SELECT COUNT(*) From AddressBookADO WHERE CITY='Saharanpur'";
+                            SqlCommand command = new SqlCommand(query, this.sqlconnection);
+                            command.CommandType = CommandType.Text;
+                            int result = command.ExecuteNonQuery();
+                            SqlDataReader dr = command.ExecuteReader();
+                            dr.Read();
+                            Console.WriteLine("No Of Contacts in Particular City:" + dr.GetInt32(0));
+                            this.sqlconnection.Close();
+                            break;
+                        case 2:
+                            string queryy = @"SELECT COUNT(*) From AddressBookADO WHERE State='UP'";
+                            SqlCommand commandd = new SqlCommand(queryy, this.sqlconnection);
+                            commandd.CommandType = CommandType.Text;
+                            int resultt = commandd.ExecuteNonQuery();
+                            SqlDataReader dataReader = commandd.ExecuteReader();
+                            dataReader.Read();
+                            Console.WriteLine("No Of Contacts in Particular State:" + dataReader.GetInt32(0));
+                            this.sqlconnection.Close();
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // handle exception here
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }
