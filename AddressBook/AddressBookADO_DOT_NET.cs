@@ -169,5 +169,31 @@ namespace AddressBook
                 Console.WriteLine(ex.Message);
             }
         }
+        public void AddNewContactInDatabase()
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+                    this.sqlconnection.Open();
+                    string query = @"INSERT INTO AddressBookADO VALUES('Manish','Reddy','Prince Valley','Bangalore','KT',646463,8774743344,'manish@gmail.com','1994-09-02') ";
+                    SqlCommand command = new SqlCommand(query, this.sqlconnection);
+                    command.CommandType = CommandType.Text;
+                    int result = command.ExecuteNonQuery();
+                    this.sqlconnection.Close();
+                    if (result >= 1)
+                    {
+                        Console.WriteLine("New Contact Added Successfully");
+                    }
+                    else
+                        Console.WriteLine("No DataBase found");
+                }
+            }
+            catch (Exception ex)
+            {
+                // handle exception here
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }
